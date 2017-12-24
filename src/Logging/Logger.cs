@@ -26,14 +26,23 @@ namespace Logging
 
         private void LogMessage(string message, string type)
         {
-            string log = $"[{DateTime.Now:HH:mm:ss}] - {type} - {message}";
+            string log = DateTime.Now.ToString("HH:mm:ss") + " - " + type + " - " + message;
 
             WriteLine(log);
         }
 
+        /* notation optimisée
+        private void LogMessage(string message, string type)
+        {
+            string log = $"[{DateTime.Now:HH:mm:ss}] - {type} - {message}";
+
+            WriteLine(log);
+        }
+        */
+
         private void WriteLine(string line)
         {
-            string filename = $"{logFileName}-{DateTime.Now:ddMMyyyy}.log";
+            string filename = logFileName + "-" + DateTime.Now.ToString("ddMMyyyy") + ".log"; /*$"{logFileName}-{DateTime.Now:ddMMyyyy}.log";*/
             string logPath = Path.Combine(path, filename);
             bool append = true;
             using (StreamWriter file =
